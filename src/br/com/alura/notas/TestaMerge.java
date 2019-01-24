@@ -17,40 +17,50 @@ public class TestaMerge {
             new Nota("Ana", 10)
         };
 
-        Nota[] rank = junta(notasDoMauricio, notasDoAlberto);
+        Nota[] rank = intercala(notasDoMauricio, notasDoAlberto);
 
         for(Nota nota : rank) {
             System.out.println(nota.getAluno() + " " + nota.getValor());
         }
     }
 
-    private static Nota[] junta(Nota[] notasDoMauricio, Nota[] notasDoAlberto) {
-        int total = notasDoMauricio.length + notasDoAlberto.length;
+    private static Nota[] intercala(Nota[] notas1, Nota[] notas2) {
+        int total = notas1.length + notas2.length;
 
         Nota[] resultado = new Nota[total];
 
-        int atualDoMauricio = 0;
-        int atualDoAlberto = 0;
+        int atual1 = 0;
+        int atual2 = 0;
         int atual = 0;
 
-        while(atualDoMauricio < notasDoMauricio.length && atualDoAlberto < notasDoAlberto.length ) {
-            Nota nota1 = notasDoMauricio[atualDoMauricio];
-            Nota nota2 = notasDoAlberto[atualDoAlberto];
-            System.out.println("Estou comparando " +nota1.getAluno() + " com " + nota2.getAluno());
+        while(atual1 < notas1.length && atual2 < notas2.length ) {
+            Nota nota1 = notas1[atual1];
+            Nota nota2 = notas2[atual2];
 
             if(nota1.getValor() < nota2.getValor()) {
                 resultado[atual] = nota1;
-                atualDoMauricio++;
+                atual1++;
             }
             else {
                 resultado[atual] = nota2;
-                atualDoAlberto++;
+                atual2++;
             }
 
             atual++;
         }
 
-        System.out.println("Estou saindo");
+        while(atual1 < notas1.length) {
+            resultado[atual] = notas1[atual1];
+            atual1++;
+            atual++;
+        }
+
+        while(atual2 < notas2.length) {
+            resultado[atual] = notas2[atual2];
+            atual2++;
+            atual++;
+        }
+
         return resultado;
     }
 }
